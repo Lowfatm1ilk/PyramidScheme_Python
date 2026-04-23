@@ -7,7 +7,8 @@ Respond in a json in the following format:
 {Name: stock abbreviation,
 percent change: +%,
 dollar change: +$,
-current value: #
+current value: #,
+daterange: mm/dd/yyyy -mm/dd/yyyy
 }
 """
 client = OpenAI(api_key=st.secrets['json'] )
