@@ -18,6 +18,7 @@ chat_history = [
 ]
 
 response = client.chat.completions.create(
+            response_format={'type':'json_object'},
             model='gpt-4o',
             messages=chat_history
         )
