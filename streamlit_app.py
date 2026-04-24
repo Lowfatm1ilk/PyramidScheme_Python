@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 import json
 system_prompt = """
-You are gonna give the user a stock that has the most positive change within this week
+You are gonna give the user a stock that has the biggest percent positive change within this week
 Respond in a json in the following format: 
 {Name: stock abbreviation,
 percent change: +%,
