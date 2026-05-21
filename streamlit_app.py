@@ -49,12 +49,6 @@ MorseCode = {
 
 user_answer = st.text_input("Type the English translation:")
 
-st.write(json.loads(response.choices[0].message.content))
-if st.button("Submit"):
-    if user_answer.upper().strip() == st.session_state.sentence:
-        st.success("Correct!")
-    else:
-        st.error(f"Incorrect. The answer was: {st.session_state.sentence}")
 
 
 client = OpenAI(api_key=st.secrets['json'] )
@@ -65,3 +59,10 @@ response = client.chat.completions.create(
             response_format={'type':'json_object'},
             model='gpt-4o',
             messages=chat_history)
+
+st.write(json.loads(response.choices[0].message.content))
+if st.button("Submit"):
+    if user_answer.upper().strip() == st.session_state.sentence:
+        st.success("Correct!")
+    else:
+        st.error(f"Incorrect. The answer was: {st.session_state.sentence}")
