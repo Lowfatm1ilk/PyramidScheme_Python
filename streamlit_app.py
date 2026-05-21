@@ -12,7 +12,6 @@ def text_to_morse(text):
 
 st.subheader("Translate this Morse code:")
 
-st.code(st.session_state.morse)
 system_prompt = """
 You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
 """
