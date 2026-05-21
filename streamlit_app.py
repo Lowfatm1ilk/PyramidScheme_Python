@@ -1,6 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 import json
+
 def text_to_morse(text):
     morse = []
 
@@ -15,11 +16,7 @@ st.subheader("Translate this Morse code:")
 system_prompt = """
 You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
 """
-user_answer = st.text_input("Type the English translation:")
-client = OpenAI(api_key=st.secrets['json'] )
-chat_history = [
-    {"role": "system", "content": system_prompt}
-]
+
 MorseCode = {
     "A": ".-",
     "B": "-...",
@@ -48,11 +45,9 @@ MorseCode = {
     "Y": "-.--",
     "Z": "--.."
 }
-response = client.chat.completions.create(
-            response_format={'type':'json_object'},
-            model='gpt-4o',
-            messages=chat_history
-        )
+
+
+user_answer = st.text_input("Type the English translation:")
 
 st.write(json.loads(response.choices[0].message.content))
 if st.button("Submit"):
@@ -62,3 +57,11 @@ if st.button("Submit"):
         st.error(f"Incorrect. The answer was: {st.session_state.sentence}")
 
 
+client = OpenAI(api_key=st.secrets['json'] )
+chat_history = [
+    {"role": "system", "content": system_prompt}]
+
+response = client.chat.completions.create(
+            response_format={'type':'json_object'},
+            model='gpt-4o',
+            messages=chat_history)
