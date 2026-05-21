@@ -15,6 +15,13 @@ st.subheader("Translate this Morse code:")
 
 system_prompt = """
 You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
+
+Return back as a json object only in the following format:
+
+{
+'morse':'.. / .-.. .. -.- . / .--. .. --.. --.. .-',
+'sentence':"i like pizza"
+}
 """
 
 MorseCode = {
@@ -59,10 +66,11 @@ response = client.chat.completions.create(
             response_format={'type':'json_object'},
             model='gpt-4o',
             messages=chat_history)
-
-st.write(json.loads(response.choices[0].message.content))
+morse = json.loads(response.choices[0].message.content)['morse']
+st.session_state['sentence'] =  json.loads(response.choices[0].message.content)['sentence']
+st.write(morse)
 if st.button("Submit"):
-    if user_answer.upper().strip() == st.session_state.sentence:
+    if user_answer.lower().strip() == st.session_state.sentence:
         st.success("Correct!")
     else:
         st.error(f"Incorrect. The answer was: {st.session_state.sentence}")
