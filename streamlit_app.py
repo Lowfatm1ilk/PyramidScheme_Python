@@ -12,6 +12,13 @@ def text_to_morse(text):
     return " ".join(morse)
 
 st.subheader("Translate this Morse code:")
+if 'answer' in st.session_state:
+    answer = st.session_state['answer']
+    if text_to_morse(answer.lower().strip()) == st.session_state.sentence:
+        st.success('Your answer was correct')
+    else:
+        st.error(f'The correct answer was {st.session_state.sentence}')
+ 
 
 system_prompt = """
 You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
@@ -70,7 +77,4 @@ morse = json.loads(response.choices[0].message.content)['morse']
 st.session_state['sentence'] =  json.loads(response.choices[0].message.content)['sentence']
 st.write(morse)
 if st.button("Submit"):
-    if user_answer.lower().strip() == st.session_state.sentence:
-        st.success("Correct!")
-    else:
-        st.error(f"Incorrect. The answer was: {st.session_state.sentence}")
+    st.session_state['answer'] = user_answer       
