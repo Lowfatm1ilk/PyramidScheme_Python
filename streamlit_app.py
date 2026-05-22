@@ -2,34 +2,6 @@ import streamlit as st
 from openai import OpenAI
 import json
 
-def text_to_morse(text):
-    morse = []
-
-    for char in text.upper():
-        if char in MorseCode:
-            morse.append(MorseCode[char])
-
-    return " ".join(morse)
-
-st.subheader("Translate this Morse code:")
-if 'answer' in st.session_state:
-    answer = st.session_state['answer']
-    if text_to_morse(answer.lower().strip()) == st.session_state.sentence:
-        st.success('Your answer was correct')
-    else:
-        st.error(f'The correct answer was {st.session_state.sentence}')
- 
-
-system_prompt = """
-You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
-
-Return back as a json object only in the following format:
-
-{
-'morse':'.. / .-.. .. -.- . / .--. .. --.. --.. .-',
-'sentence':"i like pizza"
-}
-"""
 
 MorseCode = {
     "A": ".-",
@@ -59,6 +31,36 @@ MorseCode = {
     "Y": "-.--",
     "Z": "--.."
 }
+
+def text_to_morse(text):
+    morse = []
+
+    for char in text.upper():
+        if char in MorseCode:
+            morse.append(MorseCode[char])
+
+    return " ".join(morse)
+
+st.subheader("Translate this Morse code:")
+if 'answer' in st.session_state:
+    answer = st.session_state['answer']
+    if text_to_morse(answer.lower().strip()) == st.session_state.sentence:
+        st.success('Your answer was correct')
+    else:
+        st.error(f'The correct answer was {st.session_state.sentence}')
+ 
+
+system_prompt = """
+You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
+
+Return back as a json object only in the following format:
+
+{
+'morse':'.. / .-.. .. -.- . / .--. .. --.. --.. .-',
+'sentence':"i like pizza"
+}
+"""
+
 
 
 user_answer = st.text_input("Type the English translation:")
