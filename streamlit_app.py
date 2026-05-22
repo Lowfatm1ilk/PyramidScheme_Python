@@ -51,7 +51,7 @@ if 'answer' in st.session_state:
  
 
 system_prompt = """
-You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
+You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal. Also dont give numbers.
 also here's a dicitionary for you "A": ".-",
     "B": "-...",
     "C": "-.-.",
