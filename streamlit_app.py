@@ -32,6 +32,8 @@ MorseCode = {
     "Z": "--.."
 }
 
+
+
 def text_to_morse(text):
     morse = []
 
@@ -44,6 +46,8 @@ def text_to_morse(text):
 st.subheader("Translate this Morse code:")
 if 'answer' in st.session_state:
     answer = st.session_state['answer']
+    answer
+    st.session_state['sentence']
     if st.session_state['sentence'].lower().strip()==answer.lower().strip():
         st.success('Your answer was correct')
     else:
