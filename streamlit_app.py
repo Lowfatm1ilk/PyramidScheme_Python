@@ -6,8 +6,8 @@ def text_to_morse(text):
     morse = []
 
     for char in text.upper():
-        if char in MORSE_CODE:
-            morse.append(MORSE_CODE[char])
+        if char in MorseCode:
+            morse.append(MorseCode[char])
 
     return " ".join(morse)
 
