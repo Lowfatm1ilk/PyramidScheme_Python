@@ -44,7 +44,7 @@ def text_to_morse(text):
 st.subheader("Translate this Morse code:")
 if 'answer' in st.session_state:
     answer = st.session_state['answer']
-    if st.session_state['sentence']==answer:
+    if st.session_state['sentence'].lower().strip()==answer.lower().strip():
         st.success('Your answer was correct')
     else:
         st.error(f'The correct answer was {st.session_state.sentence}')
