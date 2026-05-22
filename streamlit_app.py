@@ -52,7 +52,32 @@ if 'answer' in st.session_state:
 
 system_prompt = """
 You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal.
-
+also here's a dicitionary for you "A": ".-",
+    "B": "-...",
+    "C": "-.-.",
+    "D": "-..",
+    "E": ".",
+    "F": "..-.",
+    "G": "--.",
+    "H": "....",
+    "I": "..",
+    "J": ".---",
+    "K": "-.-",
+    "L": ".-..",
+    "M": "--",
+    "N": "-.",
+    "O": "---",
+    "P": ".--.",
+    "Q": "--.-",
+    "R": ".-.",
+    "S": "...",
+    "T": "-",
+    "U": "..-",
+    "V": "...-",
+    "W": ".--",
+    "X": "-..-",
+    "Y": "-.--",
+    "Z": "--.."
 Return back as a json object only in the following format:
 
 {
