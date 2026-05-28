@@ -44,18 +44,10 @@ def text_to_morse(text):
     return " ".join(morse)
 
 st.subheader("Translate this Morse code:")
-if 'answer' in st.session_state:
-    answer = st.session_state['answer']
-    answer
-    st.session_state['sentence']
-    if st.session_state['sentence'].lower().strip()==answer.lower().strip():
-        st.success('Your answer was correct')
-    else:
-        st.error(f'The correct answer was {st.session_state.sentence}')
- 
+
 
 system_prompt = """
-You're gonna generate one simmple sentence in morse code no punctuation and under 6 words is optimal. Also dont give numbers.
+You're gonna generate one common word in morse code no punctuation and under 4-7 letters is optimal. Also dont give numbers.
 also here's a dicitionary for you "A": ".-",
     "B": "-...",
     "C": "-.-.",
@@ -85,27 +77,29 @@ also here's a dicitionary for you "A": ".-",
 Return back as a json object only in the following format:
 
 {
-'morse':'.. / .-.. .. -.- . / .--. .. --.. --.. .-',
-'sentence':"i like pizza"
+'morse':'.--. .. --.. --.. .-',
+'word':"pizza"
 }
 """
 
 
 
 user_answer = st.text_input("Type the English translation:")
-
-
+morse = "press button to create word"
+get_word = st.button("Press to get new word")
 
 client = OpenAI(api_key=st.secrets['json'] )
 chat_history = [
     {"role": "system", "content": system_prompt}]
-
-response = client.chat.completions.create(
-            response_format={'type':'json_object'},
-            model='gpt-4o',
-            messages=chat_history)
-morse = json.loads(response.choices[0].message.content)['morse']
-st.session_state['sentence'] =  json.loads(response.choices[0].message.content)['sentence']
+if get_word:
+    response = client.chat.completions.create(
+                response_format={'type':'json_object'},
+                model='gpt-4o',
+                messages=chat_history)
+    morse = json.loads(response.choices[0].message.content)['morse']
+    word = json.loads(response.choices[0].message.content)['word']
 st.write(morse)
-if st.button("Submit"):
-    st.session_state['answer'] = user_answer       
+if user_answer == word:
+    st.succes("You translated correctly")
+else:
+    st.error('Wrong!')
