@@ -99,6 +99,9 @@ if get_word:
     morse = json.loads(response.choices[0].message.content)['morse']
     word = json.loads(response.choices[0].message.content)['word']
 st.write(morse)
+
+user_answer
+word
 if user_answer == word:
     st.succes("You translated correctly")
 else:
