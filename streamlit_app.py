@@ -31,78 +31,18 @@ MorseCode = {
     "Y": "-.--",
     "Z": "--.."
 }
+col1, col2, col3, col4 = st.columns(4)
+k = list(MorseCode.keys())
 
+for i in range(0,len(k),4):
+    col1.header(MorseCode[k[i]])
+    col1.subheader(k[i])
 
+    col2.header(MorseCode[k[i+1]])
+    col2.subheader(k[i+1])
 
-def text_to_morse(text):
-    morse = []
+    col1.header(MorseCode[k[i+2]])
+    col1.subheader(k[i+2])
 
-    for char in text.upper():
-        if char in MorseCode:
-            morse.append(MorseCode[char])
-
-    return " ".join(morse)
-
-st.subheader("Translate this Morse code:")
-
-
-system_prompt = """
-You're gonna generate one common word in morse code no punctuation and under 4-7 letters is optimal. Also dont give numbers.
-also here's a dicitionary for you "A": ".-",
-    "B": "-...",
-    "C": "-.-.",
-    "D": "-..",
-    "E": ".",
-    "F": "..-.",
-    "G": "--.",
-    "H": "....",
-    "I": "..",
-    "J": ".---",
-    "K": "-.-",
-    "L": ".-..",
-    "M": "--",
-    "N": "-.",
-    "O": "---",
-    "P": ".--.",
-    "Q": "--.-",
-    "R": ".-.",
-    "S": "...",
-    "T": "-",
-    "U": "..-",
-    "V": "...-",
-    "W": ".--",
-    "X": "-..-",
-    "Y": "-.--",
-    "Z": "--.."
-Return back as a json object only in the following format:
-
-{
-'morse':'.--. .. --.. --.. .-',
-'word':"pizza"
-}
-"""
-
-
-
-user_answer = st.text_input("Type the English translation:")
-morse = "press button to create word"
-get_word = st.button("Press to get new word")
-
-client = OpenAI(api_key=st.secrets['json'] )
-chat_history = [
-    {"role": "system", "content": system_prompt}]
-if get_word:
-    response = client.chat.completions.create(
-                response_format={'type':'json_object'},
-                model='gpt-4o',
-                messages=chat_history)
-    morse = json.loads(response.choices[0].message.content)['morse']
-    word = json.loads(response.choices[0].message.content)['word']
-    st.session_state['word'] = word
-st.write(morse)
-
-if 'word' in st.session_state:
-    if user_answer == st.session_state['word']:
-        st.success("You translated correctly")
-    else:
-        st.error('Wrong!')
+    col1.header(MorseCode[k[i+3]])
+    col1.subheader(k[i+3])
