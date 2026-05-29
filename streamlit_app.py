@@ -98,11 +98,13 @@ if get_word:
                 messages=chat_history)
     morse = json.loads(response.choices[0].message.content)['morse']
     word = json.loads(response.choices[0].message.content)['word']
+    st.session_state['word'] = word
 st.write(morse)
 
 user_answer
 word
-if user_answer == word:
-    st.succes("You translated correctly")
-else:
-    st.error('Wrong!')
+if 'word' in st.session_state:
+    if user_answer == st.session_state['word']:
+        st.succes("You translated correctly")
+    else:
+        st.error('Wrong!')
