@@ -41,8 +41,8 @@ for i in range(0,len(k),4):
     col2.header(MorseCode[k[i+1]])
     col2.subheader(k[i+1])
 
-    col1.header(MorseCode[k[i+2]])
-    col1.subheader(k[i+2])
+    col3.header(MorseCode[k[i+2]])
+    col3.subheader(k[i+2])
 
-    col1.header(MorseCode[k[i+3]])
-    col1.subheader(k[i+3])
+    col4.header(MorseCode[k[i+3]])
+    col4.subheader(k[i+3])
