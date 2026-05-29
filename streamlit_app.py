@@ -41,7 +41,7 @@ for i in range(0,len(k),4):
     col2.header(MorseCode[k[i+1]])
     col2.subheader(k[i+1])
     i
-    if i == 23:
+    if i >= 23:
         break
 
     col3.header(MorseCode[k[i+2]])
