@@ -40,7 +40,6 @@ for i in range(0,len(k),4):
 
     col2.header(MorseCode[k[i+1]])
     col2.subheader(k[i+1])
-    i
     if i >= 23:
         break
 
@@ -49,3 +48,23 @@ for i in range(0,len(k),4):
 
     col4.header(MorseCode[k[i+3]])
     col4.subheader(k[i+3])
+
+system_prompt = """Create a json object of three similar sentences. 
+These sentences should be similar but have slight differences
+Here is an example output:
+{ 
+    "s": "I like pizza", 
+    "op": ["i like pizzas","i like pineapples"]
+}"""
+
+client = OpenAI(api_key=st.secrets['json'] )
+chat_history = [
+    {"role": "system", "content": system_prompt}]
+response = client.chat.completions.create(
+                response_format={'type':'json_object'},
+                model='gpt-4o',
+                messages=chat_history)
+
+json.loads(response.choices[0].message.content)['s']
+
+json.loads(response.choices[0].message.content)['op']
