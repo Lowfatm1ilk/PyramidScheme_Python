@@ -101,8 +101,6 @@ if get_word:
     st.session_state['word'] = word
 st.write(morse)
 
-user_answer
-word
 if 'word' in st.session_state:
     if user_answer == st.session_state['word']:
         st.succes("You translated correctly")
