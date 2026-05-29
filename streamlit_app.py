@@ -103,6 +103,6 @@ st.write(morse)
 
 if 'word' in st.session_state:
     if user_answer == st.session_state['word']:
-        st.succes("You translated correctly")
+        st.success("You translated correctly")
     else:
         st.error('Wrong!')
