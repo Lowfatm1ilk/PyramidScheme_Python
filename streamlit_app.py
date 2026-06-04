@@ -1,8 +1,9 @@
 import streamlit as st
 from openai import OpenAI
 import json
+if 'left' not in st.session_state:
 
-
+    st.session_state['left']=0
 MorseCode = {
     "A": ".-",
     "B": "-...",
@@ -54,8 +55,10 @@ These sentences should be similar but have slight differences
 Here is an example output:
 { 
     "s": "I like pizza", 
-    "op": ["i like pizzas","i like pineapples"]
-}"""
+    "op": ["i like pizzas","i like pineapples","I like pizza"]
+}
+the correct sentence s should be part of the three sentences on op, but in random position
+"""
 
 client = OpenAI(api_key=st.secrets['json'] )
 chat_history = [
@@ -64,7 +67,28 @@ response = client.chat.completions.create(
                 response_format={'type':'json_object'},
                 model='gpt-4o',
                 messages=chat_history)
+ops = json.loads(response.choices[0].message.content)['op']
+s = json.loads(response.choices[0].message.content)['s']
+for i in  range(len(ops)):
+    if ops[i] ==s:
+        st.session_state['left'] = i
+b1 = st.button(json.loads(response.choices[0].message.content)['op'][0])
 
-json.loads(response.choices[0].message.content)['s']
+b2 = st.button(json.loads(response.choices[0].message.content)['op'][1])
+b3 = st.button(json.loads(response.choices[0].message.content)['op'][2])
 
-json.loads(response.choices[0].message.content)['op']
+
+if b1:
+    if st.session_state['left'] ==0:
+        st.success('You did it!')
+                 
+
+if b2:
+    if st.session_state['left'] ==1:
+        st.success('You did it!')
+                 
+
+if b3:
+    if st.session_state['left'] ==2:
+        st.success('You did it!')
+                 
