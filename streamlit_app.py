@@ -72,7 +72,7 @@ ops = json.loads(response.choices[0].message.content)['op']
 s = json.loads(response.choices[0].message.content)['s']
 morse = ""
 for c in s:
-    morse +=(MorseCode[c.upper()])
+    morse += " " + (MorseCode[c.upper()])
 
 st.write(morse)
 for i in  range(len(ops)):
