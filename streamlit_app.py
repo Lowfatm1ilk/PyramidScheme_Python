@@ -70,9 +70,11 @@ response = client.chat.completions.create(
                 messages=chat_history)
 ops = json.loads(response.choices[0].message.content)['op']
 s = json.loads(response.choices[0].message.content)['s']
-
+morse = ""
 for c in s:
-    st.write(MorseCode[c.upper()])
+    morse +=(MorseCode[c.upper()])
+
+st.write(morse)
 for i in  range(len(ops)):
     if ops[i] ==s:
         st.session_state['left'] = i
