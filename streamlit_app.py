@@ -30,7 +30,8 @@ MorseCode = {
     "W": ".--",
     "X": "-..-",
     "Y": "-.--",
-    "Z": "--.."
+    "Z": "--..",
+    " ": "/"
 }
 col1, col2, col3, col4 = st.columns(4)
 k = list(MorseCode.keys())
